@@ -1,19 +1,14 @@
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 
 public class Iperfer {
 
 	public static void main(String[] args) {
 		Iperfer ip = new Iperfer();
-		System.out.println("main: " + Arrays.toString(args));
 		ip.validateArguments(args);
 	}
 
@@ -94,8 +89,6 @@ public class Iperfer {
 			printInvalidArgsErr();
 		}
 		
-		System.out.println("Inside process client");
-		
 		// Start using the arguments
 		final String hostname = args[2];
 		final int portNum = Integer.parseInt(args[4]);
@@ -112,11 +105,9 @@ public class Iperfer {
 			long currTime = System.currentTimeMillis();
 			
 			while (currTime + (time * 1000) > System.currentTimeMillis()) {
-				System.out.println("count: " + packetCount);
 				outStream.write(data);
 				packetCount++;
 			}
-			
 			System.out.println("sent=" + packetCount + " KB rate=" + ((packetCount / 1000) / time) + " Mbps");
 			
 		} catch (IllegalArgumentException e) {
@@ -126,7 +117,6 @@ public class Iperfer {
 		} catch (IOException e) {
 			System.out.println("IOException exception");
 		}
-		
 	}
 	
 	public void processServer(final String [] args) {
@@ -135,7 +125,6 @@ public class Iperfer {
 		}
 		
 		// Start using arguments
-		System.out.println("Inside process Server");
 		final int portNum = Integer.parseInt(args[2]);
 		
 		try (
@@ -148,12 +137,10 @@ public class Iperfer {
 			final long startTime = System.currentTimeMillis();
 			int packetCount = 0;
 			while(inStream.read(serverInput) > 0) {
-				System.out.println("Server received: " + serverInput);
 				packetCount++;
 			}
 			
 			final long duration = (System.currentTimeMillis() - startTime) / 1000;
-			
 			System.out.println("received=" + packetCount + " KB rate=" + ((packetCount / 1000) / duration) + " Mbps");
 			
 			
