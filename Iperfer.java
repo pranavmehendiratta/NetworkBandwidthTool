@@ -130,20 +130,19 @@ public class Iperfer {
 		try (
 			final ServerSocket serverSocket = new ServerSocket(portNum);
 			final Socket clientSocket = serverSocket.accept();                
-	        InputStream inStream = clientSocket.getInputStream();
+			InputStream inStream = clientSocket.getInputStream();
 		) {
 			byte [] serverInput = new byte[1000];
 			
 			final long startTime = System.currentTimeMillis();
-			int packetCount = 0;
-			while(inStream.read(serverInput) > 0) {
-				packetCount++;
+			int bytes = 0;
+			int totalBytes = 0;
+			while((bytes = inStream.read(serverInput)) > 0) {
+				totalBytes += bytes;
 			}
 			
 			final long duration = (System.currentTimeMillis() - startTime) / 1000;
-			System.out.println("received=" + packetCount + " KB rate=" + ((packetCount / 1000) / duration) + " Mbps");
-			
-			
+			System.out.println("received=" + (totalBytes/1000) + " KB rate=" + (((totalBytes/1000) / 1000) / duration) + " Mbps");		
 		} catch (IllegalArgumentException e) {
 			System.out.println("Illegal argument exception");
 		} catch (SecurityException e) {
