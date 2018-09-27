@@ -1,0 +1,2 @@
+all: 
+	javac Iperfer.java
