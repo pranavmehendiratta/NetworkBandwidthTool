@@ -87,6 +87,7 @@ public class Iperfer {
 				&& validatePortNumber(args[4]) && args[5].equals("-t") 
 				&& validateTime(args[6]))) {
 			printInvalidArgsErr();
+			System.exit(0);
 		}
 		
 		// Start using the arguments
@@ -122,6 +123,7 @@ public class Iperfer {
 	public void processServer(final String [] args) {
 		if (!(args[1].equals("-p") && validatePortNumber(args[2]))) {
 			printInvalidArgsErr();
+			System.exit(0);
 		}
 		
 		// Start using arguments
