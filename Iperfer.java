@@ -109,7 +109,7 @@ public class Iperfer {
 				outStream.write(data);
 				packetCount++;
 			}
-			System.out.println("sent=" + packetCount + " KB rate=" + (((packetCount / 1000) / time) * 8) + " Mbps");
+			System.out.println("sent=" + packetCount + " KB rate=" + (((packetCount * 8) / 1000) / time) + " Mbps");
 			
 		} catch (IllegalArgumentException e) {
 			System.out.println("Illegal argument exception");
@@ -144,7 +144,7 @@ public class Iperfer {
 			}
 			
 			final long duration = (System.currentTimeMillis() - startTime) / 1000;
-			System.out.println("received=" + (totalBytes/1000) + " KB rate=" + ((((totalBytes/1000) / 1000) / duration) * 8) + " Mbps");		
+			System.out.println("received=" + (totalBytes/1000) + " KB rate=" + ((((totalBytes * 8)/1000) / 1000) / duration) + " Mbps");		
 		} catch (IllegalArgumentException e) {
 			System.out.println("Illegal argument exception");
 		} catch (SecurityException e) {
